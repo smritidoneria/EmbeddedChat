@@ -526,6 +526,7 @@ const ChatInput = ({ scrollToBottom }) => {
           <ChatInputFormattingToolbar
             messageRef={messageRef}
             inputRef={inputRef}
+            onTextChange={onTextChange}
           />
         )}
       </Box>
