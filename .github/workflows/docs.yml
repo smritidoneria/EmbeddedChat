@@ -31,9 +31,11 @@ jobs:
         run: |
           mkdir -p out/docs
           cp -r packages/react/docs/* out/docs/
-      
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          entryPoint: ./out
+          username: 'github-actions'
+          useremail: 'github-actions@github.com'
+          commitMessage: 'Deploy updated docs'
