@@ -3,7 +3,7 @@ name: Build and Publish Docs to GitHub Pages
 on:
   push:
     branches:
-      - 'report-fix' 
+      - 'report-fix'
 
 permissions:
   contents: read
@@ -21,11 +21,19 @@ jobs:
         with:
           node-version: '16.19.0'
 
-    
+      - name: Install Dependencies
+        run: yarn install
 
-      - uses: bitovi/github-actions-docs-to-github-pages@v1.0.3
+      - name: Build Documentation
+        run: yarn build
+
+      - name: Prepare Deployment Directory
+        run: |
+          mkdir -p out/docs
+          cp -r packages/react/docs/* out/docs/
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          install_command: yarn install 
-          build_command: yarn build && yarn build:storybook 
-          path: packages/react/docs
-          checkout: false
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
