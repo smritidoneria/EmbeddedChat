@@ -35,7 +35,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v2
         with:
-          entryPoint: ./out
+          publish_dir: out/docs
           username: 'github-actions'
           useremail: 'github-actions@github.com'
           commitMessage: 'Deploy updated docs'
