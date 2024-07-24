@@ -3,7 +3,7 @@ name: Build and Publish Docs to GitHub Pages
 on:
   push:
     branches:
-      - 'develop' 
+      - 'report-fix' 
 
 permissions:
   contents: read
