@@ -33,7 +33,7 @@ jobs:
           cp -r packages/react/docs/* out/docs/
       
       - name: Deploy to GitHub Pages
-        uses: bitovi/github-actions-docs-to-github-pages@v1.0.3
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
