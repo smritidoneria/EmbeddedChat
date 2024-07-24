@@ -23,10 +23,15 @@ jobs:
         with:
           node-version: "16.19.0"
 
-   
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build docs
+        run: yarn workspace docs build
 
       - name: Deploy Docs to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v2
+        uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./packages/react/docs
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: packages/react/docs
