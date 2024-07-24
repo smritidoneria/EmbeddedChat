@@ -23,15 +23,10 @@ jobs:
         with:
           node-version: "16.19.0"
 
-      - name: Build Docs with Docker
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          push: false
+   
 
       - name: Deploy Docs to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./packages/react/docs
