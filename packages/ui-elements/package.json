@@ -14,7 +14,7 @@
     ],
     "scripts": {
         "prebuild": "rimraf dist",
-        "build": "yarn prebuild && rollup -c --context=window --environment NODE_ENV:production",
+        "build": "yarn prebuild && rollup -c --context=window --environment NODE_ENV:production && mv dist build/ui-elements",
         "watch": "rollup -c --watch --context=window",
         "test:lint": "eslint src/**/*.js",
         "format": "prettier --write 'src/' ",
