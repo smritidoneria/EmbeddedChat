@@ -19,13 +19,13 @@ jobs:
           node-version: '16.19.0'
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Build React monorepo
-        run: npm run build --prefix packages/react
+        run: yarn run build --prefix packages/react
 
       - name: Build UI-elements monorepo
-        run: npm run build --prefix packages/ui-elements
+        run: yarn run build --prefix packages/ui-elements
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
