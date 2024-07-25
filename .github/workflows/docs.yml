@@ -1,4 +1,5 @@
-name: Build and Publish Docs to GitHub Pages
+
+name: Build and Published Docs to GitHub Pages
 
 on:
   push:
