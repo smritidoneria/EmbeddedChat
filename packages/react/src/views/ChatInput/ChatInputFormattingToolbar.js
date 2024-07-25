@@ -43,8 +43,9 @@ const ChatInputFormattingToolbar = ({
 
   const handleEmojiClick = (emojiEvent) => {
     const [emoji] = emojiEvent.names;
-    const updatedMessageWithEmoji =
-      messageRef.current.value + ` :${emoji.replace(/[\s-]+/g, '_')}: `;
+    const updatedMessageWithEmoji = `${
+      messageRef.current.value ?? ''
+    } :${emoji.replace(/[\s-]+/g, '_')}: `;
     messageRef.current.value = updatedMessageWithEmoji;
     onTextChange({ target: { value: updatedMessageWithEmoji } });
   };
