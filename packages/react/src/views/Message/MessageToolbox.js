@@ -11,8 +11,8 @@ import {
   appendClassNames,
 } from '@embeddedchat/ui-elements';
 import { EmojiPicker } from '../EmojiPicker';
-import { parseEmoji } from '../../lib/emoji';
 import { useMessageToolboxStyles } from './Message.styles';
+import { Markdown } from '../Markdown';
 
 export const MessageToolbox = ({
   className = '',
@@ -250,7 +250,7 @@ export const MessageToolbox = ({
               padding: '0 0.5rem 0.5rem',
             }}
           >
-            {parseEmoji(message.msg)}
+            <Markdown body={message} isReaction={false} />
           </Modal.Content>
           <Modal.Footer>
             <Button type="secondary" onClick={handleOnClose}>

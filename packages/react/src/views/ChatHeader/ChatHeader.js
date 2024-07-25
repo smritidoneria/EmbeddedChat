@@ -97,6 +97,8 @@ const ChatHeader = ({
   const filtered = useMessageStore((state) => state.filtered);
   const setFilter = useMessageStore((state) => state.setFilter);
   const threadTitle = useMessageStore((state) => state.threadMainMessage?.msg);
+  const threadMessage = useMessageStore((state) => state.threadMainMessage);
+  console.log('threadMessage', threadMessage);
   const isThreadOpen = useMessageStore((state) => state.isThreadOpen);
   const closeThread = useMessageStore((state) => state.closeThread);
 
