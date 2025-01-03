@@ -652,7 +652,7 @@ export default class EmbeddedChatApi {
       console.error(err);
     }
   }
-
+  
   async deleteMessage(msgId: string) {
     try {
       const { userId, authToken } = (await this.auth.getCurrentUser()) || {};
@@ -670,7 +670,27 @@ export default class EmbeddedChatApi {
       console.error(err);
     }
   }
-
+  async getRoomMembers() {
+    try {
+      const { userId, authToken } = (await this.auth.getCurrentUser()) || {};
+      const response = await fetch(
+        `${this.host}/api/v1/channels.members?roomId=${this.rid}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-Auth-Token": authToken,
+            "X-User-Id": userId,
+          },
+          method: "GET",
+        }
+      );
+      const data = await response.json();
+      return { members: data.members };
+    } catch (error) {
+      console.error('Error fetching room members:', error);
+      throw error;
+    }
+  }
   async updateMessage(msgId: string, text: string) {
     try {
       const { userId, authToken } = (await this.auth.getCurrentUser()) || {};

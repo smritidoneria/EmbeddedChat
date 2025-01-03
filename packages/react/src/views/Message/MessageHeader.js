@@ -33,7 +33,7 @@ const MessageHeader = ({
   const showName = ECOptions?.showName;
   const channelLevelRoles = useMemberStore((state) => state.memberRoles);
   const admins = useMemberStore((state) => state.admins);
-
+  console.log('message', message);
   const isPinned = message.pinned;
   const isStarred =
     message.starred &&

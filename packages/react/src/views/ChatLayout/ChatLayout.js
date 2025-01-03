@@ -33,6 +33,7 @@ import { useRCContext } from '../../context/RCInstance';
 import UiKitContextualBar from '../ContextualBarBlock/uiKit/UiKitContextualBar';
 import useUiKitStore from '../../store/uiKitStore';
 
+
 const ChatLayout = () => {
   const messageListRef = useRef(null);
   const { classNames, styleOverrides } = useComponentOverrides('ChatBody');
@@ -57,6 +58,7 @@ const ChatLayout = () => {
   const showChannelinfo = useChannelStore((state) => state.showChannelinfo);
   const showMembers = useMemberStore((state) => state.showMembers);
   const members = useMemberStore((state) => state.members);
+  const setMembersHandler = useMemberStore((state) => state.setMembersHandler);
   const showCurrentUserInfo = useUserStore(
     (state) => state.showCurrentUserInfo
   );
@@ -73,7 +75,7 @@ const ChatLayout = () => {
       uiKitContextualBarData: state.uiKitContextualBarData,
     })
   );
-
+  console.log("rcinstance", RCInstance);
   const scrollToBottom = () => {
     if (messageListRef && messageListRef.current) {
       requestAnimationFrame(() => {
@@ -94,9 +96,24 @@ const ChatLayout = () => {
       }
     }
   }, [isUserAuthenticated, anonymousMode, RCInstance]);
+  const fetchMembers = useCallback(async () => {
+    try {
+      const response = await RCInstance.rcClient.get(`rooms/${RCInstance.rid}/members`);
+      const data = await response.json();
+      setMembersHandler(data.members); // Update the members state
+    } catch (e) {
+      console.error(e);
+    }
+  }, [RCInstance, setMembersHandler]);
+
+
   useEffect(() => {
     getStarredMessages();
   }, [showSidebar]);
+
+  useEffect(() => {
+    fetchMembers();
+  }, [fetchMembers, showMembers]);
   return (
     <Box
       css={styles.layout}
@@ -120,7 +137,7 @@ const ChatLayout = () => {
 
       {showSidebar && (
         <Box className="ec-sidebar-view">
-          {showMembers && <RoomMembers members={members} />}
+          {showMembers && <RoomMembers fetchMembers={fetchMembers} />}
           {showSearch && <SearchMessages />}
           {showChannelinfo && <Roominfo />}
           {showAllThreads && <ThreadedMessages />}
